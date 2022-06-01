@@ -26,7 +26,14 @@ export default function Home({ allPostsData }) {
         <h2 className={utilStyles.headingLd}>Blog</h2>
         <ul className={utilStyles.list}>
           {
-            allPostsData.map(({ id, date, title }) => (
+            allPostsData.map(({ id, date, title }) => {
+              if (typeof title === 'undefined') {
+                console.log("irun due to undefined");
+                return <div className="" key="undef"></div>
+              } else {
+
+                console.log("title: ", title, "date: ", date);
+                return (
               <li className={utilStyles.listItem} key={id}>
                 <Link href={`/posts/${id}`}>
                   <a>{title}</a>
@@ -35,9 +42,11 @@ export default function Home({ allPostsData }) {
                 <small className={utilStyles.lightText} >
                   <Date dateString={date}></Date>
                 </small>
-              </li>
+                  </li>)
+              }
+            }
 
-            ))
+            )
           }
         </ul>
       </section>
